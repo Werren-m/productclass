@@ -67,5 +67,21 @@ class UserDonationController {
             next(err)
         }
     }
+    static async getUserDonationData (req, res, next) {
+        const User_Id = req.userData.id
+        try {
+            const found = await UserDonations.findAll({
+                where : {
+                    User_Id : User_Id
+                }, include : [Campaigns]
+            })
+            res.status(200).json({
+                Success : true,
+                Result : found
+            })
+        } catch (err) {
+            next(err)
+        }
+    }
 }
 module.exports = UserDonationController
