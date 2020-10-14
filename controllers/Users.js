@@ -19,13 +19,14 @@ class userController{
         email == null ? res.status(400).json({message: "Email field is required"}) : "" ;
         password == null ? res.status(400).json({message: "Password field is required"}) : "" ;
         name == null ? res.status(400).json({message: "Name field is required"}) : "" ;
+        const role = req.body.role || "user"
 
         try{
             const found = await Users.findOne({where: {email}})
             if(found){
                 res.status(400).json({message: "Email already in use"});
             }
-            const user = await Users.create(req.body)
+            const user = await Users.create(req.body,role)
             if(user){
                 const token = tokenGenerator(user)
                 res.status(200).json({token});
