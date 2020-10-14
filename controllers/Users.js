@@ -77,7 +77,7 @@ class userController{
 
     static async updateUserImage(req,res,next){
         const {id} = req.userData;
-        const photo = "localhost:3000/"+req.file.path;
+        const photo = "https://infinite-reef-41011.herokuapp.com/"+req.file.path;
         try{
             const update = await Users.update({photo},{where: {id}})
             if(update){
