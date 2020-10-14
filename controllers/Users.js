@@ -4,6 +4,16 @@ const {decryptPwd} = require('../helpers/bcrypt')
 const {tokenGenerator} = require('../helpers/jwt')
 
 class userController{
+    static async getAllUsers(req,res,next){
+        try{
+            const all = await Users.findAll({})
+            if(all){
+                res.status(200).json(all)
+            }else{
+                res.status(400).json({message: "Failed to retrieve datas"})
+            }
+        }catch(err){res.status(500).json(err.message)}
+    }
     static async register(req,res,next){
         const {email,password,name} = req.body;
         email == null ? res.status(400).json({message: "Email field is required"}) : "" ;
