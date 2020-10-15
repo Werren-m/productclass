@@ -12,6 +12,18 @@ app.use(express.urlencoded({extended: false}))
 
 app.use(router);
 
-app.listen(PORT, () => {
-    console.log(`Server running at ${PORT}`)
-});
+require("dotenv").config();
+const {router} = require('./routes/index')
+// const errorHandler = require('./error/errorHandler')
+
+// console.log(process.env.PORT)
+const port = Number(process.env.PORT) || 3000;
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: false}));
+app.use('/uploads', express.static('uploads'));
+
+app.use(router);
+// app.use(errorHandler);
+
+app.listen(port, () => console.log("Listening on port " + port));
