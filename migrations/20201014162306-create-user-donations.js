@@ -9,21 +9,26 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       User_id: {
+        allowNull: false,
         type: Sequelize.INTEGER
       },
       Campaign_id: {
+        allowNull: false,
         type: Sequelize.INTEGER
       },
       amount: {
+        allowNull: false,
         type: Sequelize.FLOAT
       },
       date: {
         type: Sequelize.DATE
       },
       share: {
+        allowNull: false,
         type: Sequelize.BOOLEAN
       },
       comment: {
+        allowNull: false,
         type: Sequelize.TEXT
       },
       createdAt: {

@@ -11,19 +11,58 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      UserDonations.belongsTo('models.Users')
-      UserDonations.belongsTo('models.Campaigns')
+      // UserDonations.belongsTo('models.Users')
+      // UserDonations.belongsTo('models.Campaigns')
 
     }
   };
   UserDonations.init({
-    User_id: DataTypes.INTEGER,
-    Campaign_id: DataTypes.INTEGER,
-    amount: DataTypes.FLOAT,
-    date: DataTypes.DATE,
-    share: DataTypes.BOOLEAN,
-    comment: DataTypes.TEXT
-  }, {
+    User_id: {
+      type: DataTypes.INTEGER,
+      validate: {
+        notEmpty: {
+          msg: "Please login"
+        }
+      }
+    },
+    Campaign_id:  {
+      type: DataTypes.INTEGER,
+      validate: {
+        notEmpty: {
+          msg: "Please select campaign you want to donate"
+        }
+      }
+    },
+    amount: {
+      type: DataTypes.FLOAT,
+      validate: {
+        notEmpty: {
+          msg: "Please fill amount you want to donate"
+        }
+      }
+    },
+    date: {
+      type : DataTypes.DATE,
+      dafault: Date.now()
+    },
+    share: {
+      type: DataTypes.BOOLEAN, 
+      default : true,
+      validate: {
+        notEmpty: {
+          msg: "Please select one option"
+        }
+      }
+    },
+    comment:{
+      type: DataTypes.TEXT,
+      validate: {
+        notEmpty: {
+          msg: "Please select one option"
+        }
+      }
+    }
+  }, {    
     sequelize,
     modelName: 'UserDonations',
   });

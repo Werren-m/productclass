@@ -1,11 +1,4 @@
 {
-<<<<<<< HEAD
-  "name": "productclass",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-=======
   "name": "team-backend",
   "version": "1.0.0",
   "description": "Initial Development Branch Push",
@@ -13,32 +6,16 @@
   "scripts": {
     "start": "node app.js",
     "server": "nodemon app.js",
->>>>>>> 3a370b4835641ef1428606123315e254b5f34c1a
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-<<<<<<< HEAD
-    "url": "git+https://github.com/Werren-m/productclass.git"
-=======
     "url": "git+https://gitlab.com/glintsxbinar_batch7-productclass/team-b-tali-kasih/team-backend.git"
->>>>>>> 3a370b4835641ef1428606123315e254b5f34c1a
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-<<<<<<< HEAD
-    "url": "https://github.com/Werren-m/productclass/issues"
-  },
-  "homepage": "https://github.com/Werren-m/productclass#readme",
-  "dependencies": {
-    "cors": "^2.8.5",
-    "dotenv": "^8.2.0",
-    "express": "^4.17.1",
-    "moment": "^2.29.1",
-    "pg": "^8.4.1",
-=======
     "url": "https://gitlab.com/glintsxbinar_batch7-productclass/team-b-tali-kasih/team-backend/issues"
   },
   "homepage": "https://gitlab.com/glintsxbinar_batch7-productclass/team-b-tali-kasih/team-backend#readme",
@@ -52,7 +29,6 @@
     "nodemon": "^2.0.5",
     "pg": "^8.4.1",
     "postgres": "^1.0.2",
->>>>>>> 3a370b4835641ef1428606123315e254b5f34c1a
     "sequelize": "^6.3.5",
     "sequelize-cli": "^6.2.0"
   }

@@ -1,6 +1,7 @@
 const { UserDonations, Users , Campaigns } = require ('../models')
 
 class UserDonationController {
+    // User donation dengan validasi
     static async donate (req, res, next) {
         const User_Id = req.userData.id
         const  Campaign_Id  = req.params.id
@@ -67,12 +68,60 @@ class UserDonationController {
             next(err)
         }
     }
+    // user donation tanpa validasi
+    static async _donate (req,res,next) {
+        const User_id = req.userData.id;
+        const Campaign_id = req.params.id
+        const { amount, share, comment} = req.body
+        try {
+            const validCampaign = await Campaigns.findOne({
+                where : {
+                    id : Campaign_id
+                }
+            })
+            if (validCampaign){
+                const add = await UserDonations.create({
+                    User_id,
+                    Campaign_id,
+                    amount,
+                    share,
+                    comment
+                })
+                //Menambahkan amount ke campaign.raised
+                const raisedData = await Campaigns.findOne({
+                    where: {
+                        id : Campaign_id
+                    }
+                })
+                const raisedBefore = raisedData.raised;
+                const raisedAfter = raisedBefore + amount;
+                const addRaised = await Campaigns.update({
+                    raised: raisedAfter},{
+                    where: {
+                        id : Campaign_id
+                    }
+                })
+                res.status(400).json({
+                    Success : true,
+                    message : `Thank you for donating Rp. ${amount} for this campaign`,
+                    data : add
+                })            
+            }else {
+                res.status(404).json({
+                    Success : false,
+                    message: "Campaign not Found"
+                })
+            }
+        } catch (err) {
+            next(err)
+        }
+    }
     static async getUserDonationData (req, res, next) {
         const User_Id = req.userData.id
         try {
             const found = await UserDonations.findAll({
                 where : {
-                    User_Id : User_Id
+                    User_id : User_Id 
                 }, include : [Campaigns]
             })
             res.status(200).json({
