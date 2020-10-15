@@ -11,8 +11,8 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      // UserDonations.belongsTo('models.Users')
-      // UserDonations.belongsTo('models.Campaigns')
+      // UserDonations.belongsTo('models.users')
+      // UserDonations.belongsTo('models.campaigns')
 
     }
   };
