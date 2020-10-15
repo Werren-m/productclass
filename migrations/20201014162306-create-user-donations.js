@@ -1,41 +1,36 @@
 'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('Campaigns', {
+    await queryInterface.createTable('UserDonations', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      title: {
-        type: Sequelize.STRING
+      User_id: {
+        allowNull: false,
+        type: Sequelize.INTEGER
       },
-      goal: {
+      Campaign_id: {
+        allowNull: false,
+        type: Sequelize.INTEGER
+      },
+      amount: {
+        allowNull: false,
         type: Sequelize.FLOAT
       },
-      raised: {
-        type: Sequelize.FLOAT
-      },
-      header_img: {
-        type: Sequelize.TEXT
-      },
-      story: {
-        type: Sequelize.TEXT
-      },
-      due_date: {
+      date: {
         type: Sequelize.DATE
       },
-      UserId: {
-        type: Sequelize.INTEGER
+      share: {
+        allowNull: false,
+        type: Sequelize.BOOLEAN
       },
-      CategoryId: {
-        type: Sequelize.INTEGER
+      comment: {
+        allowNull: false,
+        type: Sequelize.TEXT
       },
-      bankAccount: {
-        type: Sequelize.INTEGER
-      },
-
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
@@ -47,6 +42,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('Campaigns');
+    await queryInterface.dropTable('UserDonations');
   }
 };

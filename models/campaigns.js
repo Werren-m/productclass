@@ -59,7 +59,16 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     UserId: DataTypes.INTEGER,
-    CategoryId: DataTypes.INTEGER
+    CategoryId: DataTypes.INTEGER,
+    bankAccount: {
+      type: DataTypes.INTEGER,
+      validate: {
+        notEmpty: {
+          msg: "Please enter a valid bank account"
+        }
+      }
+    },
+
   }, {
     sequelize,
     modelName: 'Campaigns',

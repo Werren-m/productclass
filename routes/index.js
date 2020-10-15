@@ -1,5 +1,9 @@
-const {Router} = require('express');
-const router = Router();
+const { Router } = require('express');
+const router = Router()
+const DonationRoutes = require('./UserDonations')
+
+router.use('/donate',DonationRoutes);
+
 const userController = require('../controllers/Users')
 const auth = require('../middlewares/auth');
 const {userUpload} = require('../middlewares/multer')

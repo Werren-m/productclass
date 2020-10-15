@@ -23,8 +23,9 @@ class campaignController {
     }
 
     static async addCampaign(req,res,next){
-        const { title, goal, story, due_date, CategoryId } = req.body;
+        const { title, goal, story, due_date, CategoryId, bankAccount } = req.body;
         const header_img = "https://infinite-reef-41011.herokuapp.com/"+req.file.path;
+        const UserId = req.userData.id;
         try {
             const search = await Campaigns.findOne({where: { title }})
             if(search){
@@ -36,7 +37,9 @@ class campaignController {
                     story,
                     due_date,
                     header_img,
-                    CategoryId
+                    CategoryId,
+                    UserId,
+                    bankAccount
                 })
                 res.status(200).json(add);   
             }
@@ -47,7 +50,7 @@ class campaignController {
 
     static async editCampaign(req,res,next){
         const id = req.params.id;
-        const { title, goal, story, due_date, CategoryId } = req.body;
+        const { title, goal, story, due_date, CategoryId, bankAccount} = req.body;
         const header_img = "https://infinite-reef-41011.herokuapp.com/"+req.file.path;
         try {
             const edit = await Campaigns.update({
@@ -56,6 +59,7 @@ class campaignController {
                 story,
                 due_date,
                 header_img,
+                bankAccount,
                 CategoryId
             }, {
                 where: { id }

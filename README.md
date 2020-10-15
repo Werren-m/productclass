@@ -1,240 +1,289 @@
+# productclass
+
 # Team Backend
 
 Initial Development Branch
 
 # User API
+
 ## REGISTER
+
 ---
-### Method POST (https://infinite-reef-41011.herokuapp.com/) 
+
+### Method POST (https://infinite-reef-41011.herokuapp.com/)
+
 ### Request Header
+
 > none
+
 ### Request Body
->email : <asset_email> <br>password: <asset_password> <br>name: <asset_name><br>
+
+> email : <asset_email> <br>password: <asset_password> <br>name: <asset_name><br>
+
 ### Response (200)
->"token": "<your_token>"
+
+> "token": "<your_token>"
+
 ### Response (400 - Bad Request)
->"msg": "<error_msg>"
+
+> "msg": "<error_msg>"
+
 ---
+
 <br>
 
 ## Login
+
 ---
-### Method POST  (https://infinite-reef-41011.herokuapp.com/login)
+
+### Method POST (https://infinite-reef-41011.herokuapp.com/login)
+
 ### Request Header
+
 > none
+
 ### Request Body
->email : <asset_email> <br>password: <asset_password>
+
+> email : <asset_email> <br>password: <asset_password>
+
 ### Response (200)
->"token": "<your_token>"
+
+> "token": "<your_token>"
+
 ### Response (400 - Bad Request)
->"msg": "<error_msg>"
+
+> "msg": "<error_msg>"
+
 ---
+
 <br>
 
 ## Get All User
+
 ---
+
 ### Method GET (https://infinite-reef-41011.herokuapp.com/allusers)
+
 ### Request Header
+
 > "token": "<your_token>"
+
 ### Request Body
+
 > none
+
 ### Response (200)
->**User Table** <br>"email": "<asset_email>"<br> "password": "<asset_password>" <br> "name": "<asset_name>" <br> "photo": "<asset_photo>"<br>"creditcard": "<asset_creditcard>"<br>"role": "<asset_role>"
+
+> **User Table** <br>"email": "<asset_email>"<br> "password": "<asset_password>" <br> "name": "<asset_name>" <br> "photo": "<asset_photo>"<br>"creditcard": "<asset_creditcard>"<br>"role": "<asset_role>"
+
 ### Response (400 - Bad Request)
->"msg": "<error_msg>"
+
+> "msg": "<error_msg>"
+
 ---
+
 <br>
 
 ## Delete User
+
 ---
+
 ### Method DELETE (https://infinite-reef-41011.herokuapp.com/)
+
 ### Request Header
+
 > "token": "<your_token>"
+
 ### Request Body
+
 > none
+
 ### Response (200)
->"msg": "user deleted"
+
+> "msg": "user deleted"
+
 ### Response (400 - Bad Request)
->"msg": "<error_msg>"
+
+> "msg": "<error_msg>"
+
 ---
+
 <br>
 
 ## Update User
+
 ---
+
 ### Method PUT (https://infinite-reef-41011.herokuapp.com)
+
 ### Request Header
+
 > "token": "<your_token>"
+
 ### Request Body
-> "email": "<asset_email>"<br> "password": "<asset_password>" <br> "name": "<asset_name>" <br> "creditcard": "<asset_creditcard>"<br>"role": "<asset_role>" 
+
+> "email": "<asset_email>"<br> "password": "<asset_password>" <br> "name": "<asset_name>" <br> "creditcard": "<asset_creditcard>"<br>"role": "<asset_role>"
+
 ### Response (200)
+
 > "token": "<your_token>"
+
 ### Response (400 - Bad Request)
->"msg": "<error_msg>"
+
+> "msg": "<error_msg>"
+
 ---
+
 <br>
 
 ## Update User Image
+
 ---
+
 ### Method PUT (https://infinite-reef-41011.herokuapp.com/image)
+
 ### Request Header
+
 > "token": "<your_token>"
+
 ### Request Body
+
 > "image": "<your_image>"
+
 ### Response (200)
+
 > "token": "<your_token>"
+
 ### Response (400 - Bad Request)
->"msg": "<error_msg>"
+
+> "msg": "<error_msg>"
+
 ---
+
 <br>
 
-# Category API
+## User Add Donation to a Campaign
 
-## Get All Category
----
-### Method GET (https://infinite-reef-41011.herokuapp.com/category)
-### Request Header
-> none
-### Request Body
-> none
-### Response (200)
->**Category Table** <br>"name": "<asset_name>"<br> "image": "<asset_image>"
-### Response (400 - Bad Request)
->"msg": "<error_msg>"
----
-<br>
+### POST (https://infinite-reef-41011.herokuapp.com/donate/campaign/:id)
 
-## Add Category
----
-### Method POST (https://infinite-reef-41011.herokuapp.com/category/add)
-### Request Header
-> "token": "<your_token>"
-### Request Body
->"name": "<asset_name>"<br> "image": "<asset_image>"
-### Response (200)
->"name": "<asset_name>"<br> "image": "<asset_image>"
-### Response (409 - Conflict)
->"msg": "<error_msg>"
-### Response (400 - Bad Request)
->"msg": "<error_msg>"
----
-<br>
+parameters : Campaign id
+headers : needed access token
 
-## Edit Category
----
-### Method PUT (https://infinite-reef-41011.herokuapp.com/category/edit/:id)
-### Request Header
-> "token": "<your_token>"
-### Request Params
->"id": "<category_id>";
-### Request Body
->"name": "<asset_name>"<br> "image": "<asset_image>"
-### Response (200)
->"name": "<asset_name>"<br> "image": "<asset_image>"
-### Response (400 - Bad Request)
->"msg": "<error_msg>"
----
-<br>
+### Body
 
-## Delete Category
----
-### Method DELETE (https://infinite-reef-41011.herokuapp.com/category/delete/:id)
-### Request Header
-> "token": "<your_token>"
-### Request Params
->"id": "<category_id>";
-### Response (200)
->"msg": "<delete_success>"
-### Response (400 - Bad Request)
->"msg": "<error_msg>"
----
-<br>
+url-encoded
 
-# Campaign API
+```
+amount  = "type : Float",
+share   = "type : Booleans"
+comment = "type : String"
+```
 
-## Get All Campaign
----
-### Method GET (https://infinite-reef-41011.herokuapp.com/discover)
-### Request Header
-> none
-### Request Body
-> none
-### Response (200)
->**Campaign Table** <br>"title": "<asset_title>"<br> "goal": "<asset_goal>"<br>"story": "<asset_story>"<br> "due_date": "<asset_due_date>"<br>"header_image": "<asset_header_image>"<br> "CategoryId": "<asset_CategoryId>"<br>"raised": "<asset_raised>"
-### Response (400 - Bad Request)
->"msg": "<error_msg>"
----
-<br>
+### Respond (200 - OK)
 
-## Add Campaign
----
-### Method POST (https://infinite-reef-41011.herokuapp.com/campaign/add)
-### Request Header
-> "token": "<your_token>"
-### Request Body
->"title": "<asset_title>"<br> "goal": "<asset_goal>"<br>"story": "<asset_story>"<br> "due_date": "<asset_due_date>"<br>"header_image": "<asset_header_image>"<br> "CategoryId": "<asset_CategoryId>"
-### Response (200)
->"title": "<asset_title>"<br> "goal": "<asset_goal>"<br>"story": "<asset_story>"<br> "due_date": "<asset_due_date>"<br>"header_image": "<asset_header_image>"<br> "CategoryId": "<asset_CategoryId>"<br>"raised": "<asset_raised>"
-### Response (409 - Conflict)
->"msg": "<error_msg>"
-### Response (400 - Bad Request)
->"msg": "<error_msg>"
----
-<br>
+````
+{
+    "Success": true,
+    "message": "Thank you for donating Rp. 2000 for this campaign",
+    "data": {
+        "id": "<donation_id>",
+        "User_id": "<asset_user_id>",
+        "Campaign_id": "<asset_campaign_id>",
+        "amount": "<asset_amount>",
+        "share": "<asset_condition>",
+        "comment": "<asset_comment>",
+        "updatedAt": "2020-10-15T08:49:59.655Z",
+        "createdAt": "2020-10-15T08:49:59.655Z",
+        "date": "<asset_date>"
+    }
+}
+```
 
-## Edit Campaign
----
-### Method PUT (https://infinite-reef-41011.herokuapp.com/campaign/edit/:id)
-### Request Header
-> "token": "<your_token>"
-### Request Params
->"id": "<campaign_id>";
-### Request Body
->"title": "<asset_title>"<br> "goal": "<asset_goal>"<br>"story": "<asset_story>"<br> "due_date": "<asset_due_date>"<br>"header_image": "<asset_header_image>"<br> "CategoryId": "<asset_CategoryId>"
-### Response (200)
->"title": "<asset_title>"<br> "goal": "<asset_goal>"<br>"story": "<asset_story>"<br> "due_date": "<asset_due_date>"<br>"header_image": "<asset_header_image>"<br> "CategoryId": "<asset_CategoryId>"<br>"raised": "<asset_raised>"
-### Response (400 - Bad Request)
->"msg": "<error_msg>"
----
-<br>
+### Respond (400 - Bad Request)
 
-## Delete Campaign
----
-### Method DELETE (https://infinite-reef-41011.herokuapp.com/campaign/delete/:id)
-### Request Header
-> "token": "<your_token>"
-### Request Params
->"id": "<campaign_id>";
-### Response (200)
->"msg": "<delete_success>"
-### Response (400 - Bad Request)
->"msg": "<error_msg>"
----
-<br>
+````
 
-## Get All Campaign by Category
----
-### Method GET (https://infinite-reef-41011.herokuapp.com/discover/category)
-### Request Header
-> none
-### Request Body
-> "CategoryId": "<category_id>";
-### Response (200)
->**Campaign Table** <br>"title": "<asset_title>"<br> "goal": "<asset_goal>"<br>"story": "<asset_story>"<br> "due_date": "<asset_due_date>"<br>"header_image": "<asset_header_image>"<br> "CategoryId": "<asset_CategoryId>"<br>"raised": "<asset_raised>"
-### Response (400 - Bad Request)
->"msg": "<error_msg>"
----
-<br>
+{
+Success : false,
+message : "This Campaign's goal has been acheived"
+}
 
-## Get All Campaign by Search
----
-### Method GET (https://infinite-reef-41011.herokuapp.com/discover/search)
-### Request Header
-> none
-### Request Params
->"title": "<asset_title>";
-### Response (200)
->**Campaign Table** <br>"title": "<asset_title>"<br> "goal": "<asset_goal>"<br>"story": "<asset_story>"<br> "due_date": "<asset_due_date>"<br>"header_image": "<asset_header_image>"<br> "CategoryId": "<asset_CategoryId>"<br>"raised": "<asset_raised>"
-### Response (400 - Bad Request)
->"msg": "<error_msg>"
----
-<br>
+```
+
+### Respond (400- Bad Request)
+
+```
+
+{
+Success : false,
+message : `This Campaign only need Rp. ${expected} more, please use the rest of your money for other Campaigns`
+}
+
+```
+
+### Respond (400 - Bad Request)
+
+```
+
+{
+Success : false,
+message: "Campaign not Found"
+}
+
+```
+
+## Get all donated User's logs
+
+### GET (https://infinite-reef-41011.herokuapp.com/donate/campaign)
+
+Headers
+need access_token
+
+Body
+not needed
+
+Respond (200 - OK)
+
+```
+
+{
+"Success": true,
+"Result": [
+{
+"id": "<donation_id>",
+"User_id": "<asset_user_id>",
+"Campaign_id": "<asset_campaign_id>",
+"amount": "<asset_amount>",
+"share": "<asset_condition>",
+"comment": "<asset_comment>",
+"date": "<asset_date>"
+"updatedAt": "2020-10-15T08:49:59.655Z",
+"createdAt": "2020-10-15T08:49:59.655Z",
+}
+]
+
+}
+
+```
+
+### Respond (400 - Bad Request)
+
+```
+
+{
+Success : false,
+message : "Campaign's not found"
+}
+
+```
+### Respond (401 - Forbidden)
+```
+
+{
+Success : false,
+message : "token not valid"
+}
+
+```
+
+```
