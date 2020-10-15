@@ -22,7 +22,34 @@ const userUpload = multer({
     fileFilter: fileFormatLimit
 })
 
+const categoryStorage = multer.diskStorage({
+    destination: function(req,file,cb){
+        cb(null, "./uploads/category")
+    },
+    filename: function(req,file,cb){
+        cb(null, Date.now() + "-" + file.originalname);
+    }
+})
+
+const categoryUpload = multer({
+    storage: categoryStorage,
+    fileFilter: fileFormatLimit
+})
+
+const campaignStorage = multer.diskStorage({
+    destination: function(req,file,cb){
+        cb(null, "./uploads/campaign")
+    },
+    filename: function(req,file,cb){
+        cb(null, Date.now() + "-" + file.originalname);
+    }
+})
+
+const campaignUpload = multer({
+    storage: campaignStorage,
+    fileFilter: fileFormatLimit
+})
 
 module.exports = {
-    userUpload
+    userUpload, categoryUpload, campaignUpload
 };
