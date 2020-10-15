@@ -1,4 +1,6 @@
 const { Campaigns, Category } = require('../models');
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
 
 class campaignController {
     static async getAllCampaign(req,res,next){
@@ -75,6 +77,46 @@ class campaignController {
                 res.status(200).json({message: "campaign deleted"})
             } else{
                 res.status(400).json({message: "campaign deleted failed"})
+            }
+        } catch (err) {
+            res.status(500).json(err.message)
+        }
+    }
+
+    static async getByCategory(req,res,next){
+        const CategoryId = req.params.CategoryId;
+        try {
+            const found = await Campaigns.findAll({
+                order: [['id', 'DESC']],
+                where: { CategoryId }
+            })
+            if(found){
+                res.status(200).json(found)
+            } else{
+                res.status(400).json({message: "category not found!"})
+            }
+        } catch (err) {
+            res.status(500).json(err.message)
+        }
+    }
+
+    static async getBySearch(req,res,next){
+        const { title } = req.query;
+        try {
+            const found = await Campaigns.findAll({
+                order: [['id', 'DESC']],
+                where: {
+                    title: {
+                        [Op.iLike]: '%' + title + '%'
+                    }
+                }
+            })
+            if(found == ''){
+                res.status(400).json({message: "campaign not found!"})
+                //res.status(200).json(found)
+            } else{
+                res.status(200).json(found)
+                //res.status(400).json({message: "campaign not found!"})
             }
         } catch (err) {
             res.status(500).json(err.message)

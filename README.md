@@ -159,7 +159,7 @@ Initial Development Branch
 ### Request Body
 > none
 ### Response (200)
->**Campaign Table** <br>"title": "<asset_title>"<br> "goal": "<asset_goal>"<br>"story": "<asset_story>"<br> "due_date": "<asset_due_date>"<br>"header_image": "<asset_header_image>"<br> "CategoryId": "<asset_CategoryId>"
+>**Campaign Table** <br>"title": "<asset_title>"<br> "goal": "<asset_goal>"<br>"story": "<asset_story>"<br> "due_date": "<asset_due_date>"<br>"header_image": "<asset_header_image>"<br> "CategoryId": "<asset_CategoryId>"<br>"raised": "<asset_raised>"
 ### Response (400 - Bad Request)
 >"msg": "<error_msg>"
 ---
@@ -173,7 +173,7 @@ Initial Development Branch
 ### Request Body
 >"title": "<asset_title>"<br> "goal": "<asset_goal>"<br>"story": "<asset_story>"<br> "due_date": "<asset_due_date>"<br>"header_image": "<asset_header_image>"<br> "CategoryId": "<asset_CategoryId>"
 ### Response (200)
->"title": "<asset_title>"<br> "goal": "<asset_goal>"<br>"story": "<asset_story>"<br> "due_date": "<asset_due_date>"<br>"header_image": "<asset_header_image>"<br> "CategoryId": "<asset_CategoryId>"
+>"title": "<asset_title>"<br> "goal": "<asset_goal>"<br>"story": "<asset_story>"<br> "due_date": "<asset_due_date>"<br>"header_image": "<asset_header_image>"<br> "CategoryId": "<asset_CategoryId>"<br>"raised": "<asset_raised>"
 ### Response (409 - Conflict)
 >"msg": "<error_msg>"
 ### Response (400 - Bad Request)
@@ -187,11 +187,11 @@ Initial Development Branch
 ### Request Header
 > "token": "<your_token>"
 ### Request Params
->"id": "<category_id>";
+>"id": "<campaign_id>";
 ### Request Body
 >"title": "<asset_title>"<br> "goal": "<asset_goal>"<br>"story": "<asset_story>"<br> "due_date": "<asset_due_date>"<br>"header_image": "<asset_header_image>"<br> "CategoryId": "<asset_CategoryId>"
 ### Response (200)
->"title": "<asset_title>"<br> "goal": "<asset_goal>"<br>"story": "<asset_story>"<br> "due_date": "<asset_due_date>"<br>"header_image": "<asset_header_image>"<br> "CategoryId": "<asset_CategoryId>"
+>"title": "<asset_title>"<br> "goal": "<asset_goal>"<br>"story": "<asset_story>"<br> "due_date": "<asset_due_date>"<br>"header_image": "<asset_header_image>"<br> "CategoryId": "<asset_CategoryId>"<br>"raised": "<asset_raised>"
 ### Response (400 - Bad Request)
 >"msg": "<error_msg>"
 ---
@@ -203,9 +203,37 @@ Initial Development Branch
 ### Request Header
 > "token": "<your_token>"
 ### Request Params
->"id": "<category_id>";
+>"id": "<campaign_id>";
 ### Response (200)
 >"msg": "<delete_success>"
+### Response (400 - Bad Request)
+>"msg": "<error_msg>"
+---
+<br>
+
+## Get All Campaign by Category
+---
+### Method GET (https://infinite-reef-41011.herokuapp.com/discover/category)
+### Request Header
+> none
+### Request Body
+> "CategoryId": "<category_id>";
+### Response (200)
+>**Campaign Table** <br>"title": "<asset_title>"<br> "goal": "<asset_goal>"<br>"story": "<asset_story>"<br> "due_date": "<asset_due_date>"<br>"header_image": "<asset_header_image>"<br> "CategoryId": "<asset_CategoryId>"<br>"raised": "<asset_raised>"
+### Response (400 - Bad Request)
+>"msg": "<error_msg>"
+---
+<br>
+
+## Get All Campaign by Search
+---
+### Method GET (https://infinite-reef-41011.herokuapp.com/discover/search)
+### Request Header
+> none
+### Request Params
+>"title": "<asset_title>";
+### Response (200)
+>**Campaign Table** <br>"title": "<asset_title>"<br> "goal": "<asset_goal>"<br>"story": "<asset_story>"<br> "due_date": "<asset_due_date>"<br>"header_image": "<asset_header_image>"<br> "CategoryId": "<asset_CategoryId>"<br>"raised": "<asset_raised>"
 ### Response (400 - Bad Request)
 >"msg": "<error_msg>"
 ---
