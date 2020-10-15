@@ -1,6 +1,6 @@
 # Team Backend
 
-Initial Development Branch Push
+Initial Development Branch
 
 # User API
 ## REGISTER
