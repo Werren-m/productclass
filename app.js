@@ -13,5 +13,5 @@ app.use('/uploads', express.static('uploads'));
 
 app.use(router);
 // app.use(errorHandler);
-// anythikng
+// anything
 app.listen(port, () => console.log("Listening on port " + port));
