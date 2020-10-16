@@ -11,13 +11,13 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      // UserDonations.belongsTo('models.users')
-      // UserDonations.belongsTo('models.campaigns')
+      UserDonations.belongsTo(models.Users)
+      UserDonations.belongsTo(models.Campaigns)
 
     }
   };
   UserDonations.init({
-    User_id: {
+    UserId: {
       type: DataTypes.INTEGER,
       validate: {
         notEmpty: {
@@ -25,7 +25,7 @@ module.exports = (sequelize, DataTypes) => {
         }
       }
     },
-    Campaign_id:  {
+    CampaignId:  {
       type: DataTypes.INTEGER,
       validate: {
         notEmpty: {

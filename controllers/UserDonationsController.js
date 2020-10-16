@@ -3,14 +3,14 @@ const { UserDonations, Users , Campaigns } = require ('../models')
 class UserDonationController {
     // User donation dengan validasi
     static async donate (req, res, next) {
-        const User_Id = req.userData.id
-        const  Campaign_Id  = req.params.id
+        const UserId = req.userData.id
+        const  CampaignId  = req.params.id
         const { amount, share, comment } = req.body
         try {
             //Validasi apakah Campaigns ada
             const validCampaign = await Campaigns.findOne({
                 where : {
-                    id : Campaign_Id
+                    id : CampaignId
                 }
             })
             if (validCampaign) {
@@ -31,15 +31,15 @@ class UserDonationController {
                             })
                         } else {
                             const add = await UserDonations.create({
-                                User_Id,
-                                Campaign_Id,
+                                UserId,
+                                CampaignId,
                                 amount,
                                 share,
                                 comment
                             })
                             const raisedData = await Campaigns.findOne({
                                 where: {
-                                    id : Campaign_Id
+                                    id : CampaignId
                                 }
                             })
                             const raisedBefore = raisedData.raised;
@@ -47,7 +47,7 @@ class UserDonationController {
                             const addRaised = await Campaigns.update({
                                 raised: raisedAfter},{
                                 where: {
-                                    id : Campaign_Id
+                                    id : CampaignId
                                 }
                             })
                             res.status(400).json({
@@ -70,19 +70,19 @@ class UserDonationController {
     }
     // user donation tanpa validasi
     static async _donate (req,res,next) {
-        const User_id = req.userData.id;
-        const Campaign_id = req.params.id
+        const UserId = req.userData.id;
+        const CampaignId = req.params.id
         const { amount, share, comment} = req.body
         try {
             const validCampaign = await Campaigns.findOne({
                 where : {
-                    id : Campaign_id
+                    id : CampaignId
                 }
             })
             if (validCampaign){
                 const add = await UserDonations.create({
-                    User_id,
-                    Campaign_id,
+                    UserId,
+                    CampaignId,
                     amount,
                     share,
                     comment
@@ -90,7 +90,7 @@ class UserDonationController {
                 //Menambahkan amount ke campaign.raised
                 const raisedData = await Campaigns.findOne({
                     where: {
-                        id : Campaign_id
+                        id : CampaignId
                     }
                 })
                 const raisedBefore = raisedData.raised;
@@ -98,7 +98,7 @@ class UserDonationController {
                 const addRaised = await Campaigns.update({
                     raised: raisedAfter},{
                     where: {
-                        id : Campaign_id
+                        id : CampaignId
                     }
                 })
                 res.status(400).json({
@@ -117,12 +117,12 @@ class UserDonationController {
         }
     }
     static async getUserDonationData (req, res, next) {
-        const User_Id = req.userData.id
+        const UserId = req.userData.id
         try {
             const found = await UserDonations.findAll({
                 where : {
-                    User_id : User_Id 
-                }, include : [Campaigns]
+                    UserId : UserId 
+                }, include : [Campaigns,Users]
             })
             res.status(200).json({
                 Success : true,
